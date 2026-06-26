@@ -1,45 +1,50 @@
-# [Project name]
+# Wayne B Photography
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A professional events photography portfolio website for waynebphotography.com — two-page editorial static site built with React + Vite.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/wayne-b-photography run dev` — run the site (port auto-assigned)
 - `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite, Wouter routing
+- Styling: Custom CSS (Inter + Georgia, near-black #0d0d0d / white)
+- No backend required — fully static site
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
-
-## Architecture decisions
-
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- `artifacts/wayne-b-photography/src/pages/Home.tsx` — main portfolio page
+- `artifacts/wayne-b-photography/src/pages/Gallery.tsx` — CNHF gallery page with lightbox
+- `artifacts/wayne-b-photography/src/index.css` — all styles (design tokens, layout, responsive)
+- `artifacts/wayne-b-photography/src/App.tsx` — routing (/ and /cnhf-gallery)
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Two-page photography portfolio:
+1. **Home (/)** — Fixed nav, full-screen hero "Every moment deserves to last.", featured CNHF corporate card → gallery, 9-cell asymmetric grid (Birthday / Baby Shower / Quinceañera / Sports / Calivibes / Model), services strip (4 categories), about section, dark contact section
+2. **Gallery (/cnhf-gallery)** — Event hero header, 3-column masonry gallery (9 photos), lightbox with ←/→/Escape keyboard nav, "View & Download All" button to Google Drive folder
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Design: Inter font body, Georgia serif headlines, #0d0d0d near-black background, white text, 3px grid gaps
+- Hover zoom on all photo cells and masonry items
+- Mobile responsive (breakpoints at 768px and 480px)
+- Domain: waynebphotography.com
+- Instagram: @waynebphoto
+- Email: waynebphotography@gmail.com
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- **Google Drive photos**: Replace `PHOTO_FILE_ID_1` through `PHOTO_FILE_ID_9` in `Gallery.tsx` with real Google Drive file IDs. Also replace `REPLACE_WITH_YOUR_FOLDER_ID` in `DRIVE_FOLDER_URL` with the actual folder ID. File ID is the long string in a Drive share link: `drive.google.com/file/d/FILE_ID/view`
+- Portfolio grid uses CSS gradient placeholders — swap with real `<img>` tags when photos are available
+- The site is served at previewPath `/` so it occupies the root
 
-## Pointers
+## Architecture decisions
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- Presentation-first: no API, no database — all static content in React components
+- CSS custom properties for the design system (no Tailwind utility classes in main layout)
+- Masonry via CSS `columns` for true masonry flow without JS libraries
+- Lightbox is fully custom — no external dependency, keyboard + click-outside to close

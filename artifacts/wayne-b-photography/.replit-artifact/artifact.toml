@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Wayne B Photography"
+version = "1.0.0"
+id = "artifacts/wayne-b-photography"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22736
+
+[services.development]
+run = "pnpm --filter @workspace/wayne-b-photography run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/wayne-b-photography", "run", "build" ]
+publicDir = "artifacts/wayne-b-photography/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22736"
+BASE_PATH = "/"
