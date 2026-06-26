@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events Photography — Wayne B Photography</title>
+  <meta name="description" content="Wayne B Photography — events, celebrations, sports, and corporate photography in San Diego and beyond." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black:#0d0d0d; --white:#fff; --grey-1:#f5f5f3; --grey-2:#e8e8e4; --grey-3:#999996; --grey-4:#555552; --font:'Inter','Helvetica Neue',Arial,sans-serif; --serif:'Georgia','Times New Roman',serif; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.25rem 2.5rem; background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--grey-2); }
+    .nav-logo { font-size:.875rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+    .nav-links { display:flex; gap:2rem; list-style:none; font-size:.8125rem; letter-spacing:.08em; text-transform:uppercase; color:var(--grey-4); }
+    .nav-links a:hover, .nav-links a.active { color:var(--black); }
+    .nav-links a.active { border-bottom:1.5px solid var(--black); padding-bottom:1px; }
+
+    /* ── Hero ── */
+    .hero { margin-top:62px; position:relative; height:calc(100vh - 62px); min-height:540px; display:flex; align-items:flex-end; overflow:hidden; }
+    .hero-media { position:absolute; inset:0; }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.62) 0%,rgba(0,0,0,0.04) 55%); }
+    .hero-content { position:relative; z-index:2; padding:3rem 2.5rem; color:var(--white); max-width:660px; }
+    .hero-label { font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase; opacity:.7; margin-bottom:.75rem; }
+    .hero-title { font-family:var(--serif); font-size:clamp(2.25rem,5vw,4rem); font-weight:400; line-height:1.1; margin-bottom:1.25rem; }
+    .hero-sub { font-size:.9375rem; line-height:1.65; opacity:.82; max-width:460px; margin-bottom:2rem; }
+    .btn { display:inline-block; padding:.75rem 2rem; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; border:1.5px solid var(--white); color:var(--white); transition:background .2s,color .2s; }
+    .btn:hover { background:var(--white); color:var(--black); }
+    .btn-dark { border-color:var(--black); color:var(--black); }
+    .btn-dark:hover { background:var(--black); color:var(--white); }
+
+    /* ── Section ── */
+    section { padding:5rem 2.5rem; }
+    .section-label { font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase; color:var(--grey-3); margin-bottom:.75rem; }
+    .section-title { font-family:var(--serif); font-size:clamp(1.75rem,3.5vw,2.75rem); font-weight:400; line-height:1.15; margin-bottom:1.25rem; }
+    .section-body { font-size:.9375rem; line-height:1.7; color:var(--grey-4); max-width:560px; }
+
+    /* ── Featured Events (Corporate Strip) ── */
+    .featured-events { padding:0; background:var(--grey-1); }
+    .featured-inner { padding:3.5rem 2.5rem; display:grid; grid-template-columns:1fr 1fr; gap:3px; }
+    .featured-text { padding:2rem 2rem 2rem 0; display:flex; flex-direction:column; justify-content:center; }
+    .feat-card { position:relative; height:320px; overflow:hidden; background:var(--grey-2); cursor:pointer; }
+    .feat-card img { transition:transform .5s cubic-bezier(.25,.46,.45,.94); }
+    .feat-card:hover img { transform:scale(1.04); }
+    .feat-card-label { position:absolute; bottom:.75rem; left:.75rem; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.85); background:rgba(0,0,0,.4); padding:.2rem .45rem; backdrop-filter:blur(4px); }
+    .feat-link { display:inline-flex; align-items:center; gap:.5rem; margin-top:1.5rem; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; border-bottom:1px solid var(--black); padding-bottom:2px; width:fit-content; }
+
+    /* ── Gallery ── */
+    .gallery-section { padding-top:2rem; padding-bottom:5rem; }
+    .gallery-header { padding:0 2.5rem 2.5rem; }
+    .gallery-grid { padding:0 2.5rem; }
+    .grid-row-1 { display:grid; grid-template-columns:1.62fr 1fr; grid-template-rows:340px 340px; gap:3px; margin-bottom:3px; }
+    .grid-row-1 .g-cell:first-child { grid-row:1/3; }
+    .grid-row-2 { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:280px; gap:3px; margin-bottom:3px; }
+    .grid-row-3 { display:grid; grid-template-columns:1fr 1.62fr; grid-template-rows:340px 340px; gap:3px; }
+    .grid-row-3 .g-cell:last-child { grid-row:1/3; }
+    .g-cell { position:relative; overflow:hidden; background:var(--grey-1); }
+    .g-cell img { transition:transform .55s cubic-bezier(.25,.46,.45,.94); }
+    .g-cell:hover img { transform:scale(1.04); }
+    .g-cell::after { content:attr(data-label); position:absolute; bottom:.75rem; left:.75rem; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.85); background:rgba(0,0,0,.4); padding:.2rem .45rem; backdrop-filter:blur(4px); }
+
+    /* ── Services ── */
+    .services { background:var(--grey-1); display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
+    .service-card { padding:3rem 2.5rem; border-right:1px solid var(--grey-2); }
+    .service-card:last-child { border-right:none; }
+    .service-num { font-size:.6rem; letter-spacing:.18em; color:var(--grey-3); margin-bottom:1.25rem; display:block; }
+    .service-name { font-family:var(--serif); font-size:1.25rem; font-weight:400; margin-bottom:.75rem; }
+    .service-desc { font-size:.8125rem; line-height:1.65; color:var(--grey-4); }
+
+    /* ── About ── */
+    .about { display:grid; grid-template-columns:1fr 1fr; align-items:center; }
+    .about-image { height:520px; overflow:hidden; background:var(--grey-1); }
+    .about-text { padding:4rem 3.5rem; }
+
+    /* ── Contact ── */
+    .contact { background:var(--black); color:var(--white); text-align:center; padding:5rem 2.5rem; }
+    .contact .section-label { color:rgba(255,255,255,.4); }
+    .contact .section-title { color:var(--white); margin:0 auto 1.25rem; }
+    .contact .section-body { color:rgba(255,255,255,.6); margin:0 auto 2.5rem; }
+    .contact-email { font-size:clamp(1.1rem,2.5vw,1.5rem); font-family:var(--serif); border-bottom:1px solid rgba(255,255,255,.3); display:inline-block; padding-bottom:.25rem; margin-bottom:2.5rem; transition:border-color .2s; }
+    .contact-email:hover { border-color:var(--white); }
+
+    footer { padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--grey-2); font-size:.75rem; color:var(--grey-3); }
+
+    @media (max-width:768px) {
+      nav { padding:1rem 1.25rem; } .nav-links { gap:1.25rem; }
+      section { padding:3.5rem 1.25rem; }
+      .gallery-header,.gallery-grid { padding-left:1.25rem; padding-right:1.25rem; }
+      .grid-row-1 { grid-template-columns:1fr; grid-template-rows:260px 200px 200px; }
+      .grid-row-1 .g-cell:first-child { grid-row:auto; }
+      .grid-row-2 { grid-template-columns:1fr 1fr; grid-template-rows:200px 200px; }
+      .grid-row-2 .g-cell:last-child { grid-column:1/-1; }
+      .grid-row-3 { grid-template-columns:1fr; grid-template-rows:200px 200px 260px; }
+      .grid-row-3 .g-cell:last-child { grid-row:auto; }
+      .featured-inner { grid-template-columns:1fr; }
+      .featured-text { padding:2rem 0 0; }
+      .feat-card { height:260px; }
+      .about { grid-template-columns:1fr; } .about-image { height:320px; }
+      .about-text { padding:2.5rem 1.25rem; }
+      footer { flex-direction:column; gap:.75rem; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Wayne B Photography</a>
+  <ul class="nav-links">
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#" class="active">Events</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO — Avery Birthday -->
+<section class="hero">
+  <div class="hero-media">
+    <img src="images/hero.jpg" alt="Wayne B Photography — Events" />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-label">Events Photography</p>
+    <h1 class="hero-title">Every moment<br>deserves to last.</h1>
+    <p class="hero-sub">From corporate milestones to intimate celebrations, Wayne B captures the energy, emotion, and atmosphere that make every event unforgettable.</p>
+    <a href="#gallery" class="btn">View the Work</a>
+  </div>
+</section>
+
+<!-- FEATURED: Corporate (CNCH) -->
+<div class="featured-events">
+  <div class="featured-inner">
+    <div class="featured-text">
+      <p class="section-label">Latest Corporate Work</p>
+      <h2 class="section-title" style="font-size:clamp(1.4rem,2.5vw,2rem);">Central Neighborhood Christian Health<br>Residency Orientation</h2>
+      <p class="section-body" style="font-size:.875rem;">Residency Program Orientation Day — June 26, 2026. Full event coverage from welcome breakfast through orientation sessions, resident introductions, and group moments.</p>
+      <a href="cnhf-gallery.html" class="feat-link">View Full Gallery →</a>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:320px; gap:3px;">
+      <div class="feat-card" style="grid-row:1/2;">
+        <img src="https://lh3.googleusercontent.com/d/1UwTNet9aZxlaKwz1cnzbJIVNbjQsXUGg=w800" alt="CNCH Orientation" />
+        <span class="feat-card-label">Corporate · CNCH</span>
+      </div>
+      <div class="feat-card" style="grid-row:1/2;">
+        <img src="https://lh3.googleusercontent.com/d/1ggXGUB_twkmd1lqZXbgmlJi5UfwgP27c=w800" alt="CNCH Residency" />
+        <span class="feat-card-label">Corporate · CNCH</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY: Priority — Avery + Mix -->
+<div class="gallery-section" id="gallery">
+  <div class="gallery-header">
+    <p class="section-label">Selected Work</p>
+    <h2 class="section-title">Events Gallery</h2>
+  </div>
+  <div class="gallery-grid">
+
+    <div class="grid-row-1">
+      <div class="g-cell" data-label="Birthday — Avery">
+        <img src="images/01_avery_a.jpg" alt="Avery birthday celebration" />
+      </div>
+      <div class="g-cell" data-label="Birthday — Avery">
+        <img src="images/02_avery_b.jpg" alt="Avery birthday party" />
+      </div>
+      <div class="g-cell" data-label="Birthday — Avery">
+        <img src="images/03_avery_c.jpg" alt="Avery birthday moments" />
+      </div>
+    </div>
+
+    <div class="grid-row-2">
+      <div class="g-cell" data-label="Sports — Boxing">
+        <img src="images/02_sports_a.jpg" alt="Sports photography" />
+      </div>
+      <div class="g-cell" data-label="Quinceañera">
+        <img src="images/03_quincenera.jpg" alt="Quinceañera photography" />
+      </div>
+      <div class="g-cell" data-label="Calivibes">
+        <img src="images/04_calivibes.jpg" alt="Calivibes event" />
+      </div>
+    </div>
+
+    <div class="grid-row-3">
+      <div class="g-cell" data-label="Sports — Boxing">
+        <img src="images/05_sports_b.jpg" alt="Boxing event" />
+      </div>
+      <div class="g-cell" data-label="Baby Shower">
+        <img src="images/01_babyshower.jpg" alt="Baby shower celebration" />
+      </div>
+      <div class="g-cell" data-label="Model Shoot">
+        <img src="images/08_model.jpg" alt="Model photography" />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="services">
+  <div class="service-card"><span class="service-num">01</span><h3 class="service-name">Corporate Events</h3><p class="service-desc">Orientations, conferences, health fairs, and milestones — professional coverage that tells your organization's story.</p></div>
+  <div class="service-card"><span class="service-num">02</span><h3 class="service-name">Celebrations</h3><p class="service-desc">Quinceañeras, birthdays, baby showers, and private parties — candid moments that tell the real story.</p></div>
+  <div class="service-card"><span class="service-num">03</span><h3 class="service-name">Sports & Action</h3><p class="service-desc">Boxing, athletics, and live competitions — fast, precise coverage that freezes peak moments.</p></div>
+  <div class="service-card"><span class="service-num">04</span><h3 class="service-name">Culture & Lifestyle</h3><p class="service-desc">Community events, model shoots, and brand activations — broad coverage with an editorial eye.</p></div>
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+  <div class="about-image"><img src="images/04_calivibes.jpg" alt="Wayne B Photography" /></div>
+  <div class="about-text">
+    <p class="section-label">The Approach</p>
+    <h2 class="section-title">Present in the moment.<br>Invisible in the room.</h2>
+    <p class="section-body">Wayne B Photography specializes in event coverage that feels natural, not staged. Working with available light and an unobtrusive presence, every frame is a genuine slice of what actually happened.</p>
+    <br /><p class="section-body">Based in San Diego, CA. Available worldwide.</p>
+    <br /><br /><a href="#contact" class="btn btn-dark">Book a Conversation</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2 class="section-title">Let's capture your next event.</h2>
+  <p class="section-body">Tell me about your event — dates, location, what you need — and I'll get back within 24 hours.</p>
+  <a href="mailto:waynebphotography@gmail.com" class="contact-email">waynebphotography@gmail.com</a><br />
+  <a href="mailto:waynebphotography@gmail.com" class="btn" style="border-color:rgba(255,255,255,0.4)">Send an Enquiry</a>
+</section>
+
+<footer>
+  <span>© 2026 Wayne B Photography. All rights reserved.</span>
+  <span>Events · Celebrations · Sports · Culture</span>
+</footer>
+
+</body>
+</html>
