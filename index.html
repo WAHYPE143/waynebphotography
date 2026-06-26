@@ -71,18 +71,71 @@
     .service-name { font-family:var(--serif); font-size:1.25rem; font-weight:400; margin-bottom:.75rem; }
     .service-desc { font-size:.8125rem; line-height:1.65; color:var(--grey-4); }
 
+    /* ── Galleries Strip ── */
+    .galleries-strip { padding:4rem 2.5rem; }
+    .galleries-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:3px; margin-top:2.5rem; }
+    .gal-thumb { position:relative; height:200px; overflow:hidden; background:var(--grey-1); display:block; }
+    .gal-thumb img { transition:transform .5s cubic-bezier(.25,.46,.45,.94); }
+    .gal-thumb:hover img { transform:scale(1.06); }
+    .gal-thumb-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.0) 55%); transition:background .3s; }
+    .gal-thumb:hover .gal-thumb-overlay { background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.1) 60%); }
+    .gal-thumb-label { position:absolute; bottom:0; left:0; right:0; padding:.85rem .75rem .65rem; }
+    .gal-thumb-name { display:block; font-family:var(--serif); font-size:.875rem; color:#fff; margin-bottom:.2rem; }
+    .gal-thumb-count { display:block; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.55); }
+
+    /* ── Pricing ── */
+    .pricing { padding:5rem 2.5rem; background:var(--grey-1); }
+    .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--grey-2); margin-top:3rem; }
+    .price-card { background:var(--white); padding:2.75rem 2.25rem 2.25rem; position:relative; display:flex; flex-direction:column; }
+    .price-card.featured { background:var(--black); color:var(--white); }
+    .price-badge { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; background:var(--black); color:var(--white); padding:.25rem .6rem; position:absolute; top:2rem; right:2rem; }
+    .price-card.featured .price-badge { background:var(--white); color:var(--black); }
+    .price-tier { font-size:.6875rem; letter-spacing:.15em; text-transform:uppercase; color:var(--grey-3); margin-bottom:1rem; }
+    .price-card.featured .price-tier { color:rgba(255,255,255,.5); }
+    .price-amount { font-family:var(--serif); font-size:2.75rem; font-weight:400; margin-bottom:.25rem; line-height:1; }
+    .price-unit { font-size:.75rem; color:var(--grey-3); margin-bottom:2rem; }
+    .price-card.featured .price-unit { color:rgba(255,255,255,.4); }
+    .price-features { list-style:none; display:flex; flex-direction:column; gap:.7rem; margin-bottom:2rem; flex:1; }
+    .price-features li { font-size:.8125rem; line-height:1.5; color:var(--grey-4); padding-left:1.1rem; position:relative; }
+    .price-features li::before { content:'—'; position:absolute; left:0; color:var(--grey-3); }
+    .price-card.featured .price-features li { color:rgba(255,255,255,.7); }
+    .price-card.featured .price-features li::before { color:rgba(255,255,255,.3); }
+    .price-cta { display:inline-block; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; border-bottom:1px solid currentColor; padding-bottom:2px; opacity:.7; margin-top:auto; width:fit-content; transition:opacity .2s; }
+    .price-cta:hover { opacity:1; }
+    .price-note { font-size:.75rem; color:var(--grey-3); margin-top:2rem; font-style:italic; }
+
     /* ── About ── */
     .about { display:grid; grid-template-columns:1fr 1fr; align-items:center; }
     .about-image { height:520px; overflow:hidden; background:var(--grey-1); }
     .about-text { padding:4rem 3.5rem; }
 
     /* ── Contact ── */
-    .contact { background:var(--black); color:var(--white); text-align:center; padding:5rem 2.5rem; }
+    .contact { background:var(--black); color:var(--white); padding:5rem 2.5rem; }
+    .contact-inner { max-width:960px; margin:0 auto; display:grid; grid-template-columns:1fr 1.4fr; gap:6rem; align-items:start; }
     .contact .section-label { color:rgba(255,255,255,.4); }
-    .contact .section-title { color:var(--white); margin:0 auto 1.25rem; }
-    .contact .section-body { color:rgba(255,255,255,.6); margin:0 auto 2.5rem; }
-    .contact-email { font-size:clamp(1.1rem,2.5vw,1.5rem); font-family:var(--serif); border-bottom:1px solid rgba(255,255,255,.3); display:inline-block; padding-bottom:.25rem; margin-bottom:2.5rem; transition:border-color .2s; }
-    .contact-email:hover { border-color:var(--white); }
+    .contact .section-title { color:var(--white); margin-bottom:1.25rem; }
+    .contact .section-body { color:rgba(255,255,255,.55); margin-bottom:2rem; font-size:.875rem; max-width:340px; }
+    .contact-direct { display:flex; flex-direction:column; gap:1rem; margin-top:.5rem; }
+    .contact-direct-item { display:flex; flex-direction:column; gap:.2rem; }
+    .contact-direct-label { font-size:.6rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.35); }
+    .contact-direct a { font-size:.875rem; color:rgba(255,255,255,.7); transition:color .2s; }
+    .contact-direct a:hover { color:var(--white); }
+    .contact-form { display:flex; flex-direction:column; gap:1rem; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .form-field { display:flex; flex-direction:column; gap:.4rem; }
+    .form-field label { font-size:.625rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.4); }
+    .form-field input, .form-field select, .form-field textarea {
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.13); color:var(--white);
+      padding:.75rem 1rem; font-size:.875rem; font-family:var(--font); outline:none;
+      transition:border-color .2s; -webkit-appearance:none; border-radius:0;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color:rgba(255,255,255,.4); }
+    .form-field input::placeholder, .form-field textarea::placeholder { color:rgba(255,255,255,.22); }
+    .form-field select { color:rgba(255,255,255,.7); }
+    .form-field select option { background:#1a1a1a; color:var(--white); }
+    .form-field textarea { resize:vertical; min-height:110px; }
+    .form-submit { background:var(--white); color:var(--black); border:none; padding:.9rem 2.25rem; font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; font-family:var(--font); transition:opacity .2s; width:fit-content; margin-top:.5rem; }
+    .form-submit:hover { opacity:.85; }
 
     footer { padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--grey-2); font-size:.75rem; color:var(--grey-3); }
 
@@ -101,6 +154,14 @@
       .feat-card { height:260px; }
       .about { grid-template-columns:1fr; } .about-image { height:320px; }
       .about-text { padding:2.5rem 1.25rem; }
+      .galleries-strip { padding:3rem 1.25rem; }
+      .galleries-grid { grid-template-columns:repeat(2,1fr); }
+      .galleries-grid .gal-thumb:last-child { grid-column:1/-1; }
+      .pricing { padding:3.5rem 1.25rem; }
+      .pricing-grid { grid-template-columns:1fr; }
+      .contact { padding:3.5rem 1.25rem; }
+      .contact-inner { grid-template-columns:1fr; gap:3rem; }
+      .form-row { grid-template-columns:1fr; }
       footer { flex-direction:column; gap:.75rem; text-align:center; }
     }
   </style>
@@ -110,10 +171,10 @@
 <nav>
   <a href="/" class="nav-logo">Wayne B Photography</a>
   <ul class="nav-links">
-    <li><a href="#">Portfolio</a></li>
-    <li><a href="#" class="active">Events</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#gallery">Portfolio</a></li>
+    <li><a href="#events" class="active">Events</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Book</a></li>
   </ul>
 </nav>
 
@@ -208,6 +269,116 @@
   <div class="service-card"><span class="service-num">04</span><h3 class="service-name">Culture & Lifestyle</h3><p class="service-desc">Community events, model shoots, and brand activations — broad coverage with an editorial eye.</p></div>
 </div>
 
+<!-- PER-EVENT GALLERIES -->
+<div class="galleries-strip" id="events">
+  <p class="section-label">Browse by Event</p>
+  <h2 class="section-title">Event Galleries</h2>
+  <div class="galleries-grid">
+
+    <a href="cnhf-gallery.html" class="gal-thumb">
+      <img src="https://lh3.googleusercontent.com/d/1UwTNet9aZxlaKwz1cnzbJIVNbjQsXUGg=w600" alt="CNCH Residency" />
+      <div class="gal-thumb-overlay"></div>
+      <div class="gal-thumb-label">
+        <span class="gal-thumb-name">CNCH Residency</span>
+        <span class="gal-thumb-count">Corporate · June 2026</span>
+      </div>
+    </a>
+
+    <a href="#" class="gal-thumb">
+      <img src="images/01_avery_a.jpg" alt="Avery Birthday" />
+      <div class="gal-thumb-overlay"></div>
+      <div class="gal-thumb-label">
+        <span class="gal-thumb-name">Avery's Birthday</span>
+        <span class="gal-thumb-count">Celebration · 2026</span>
+      </div>
+    </a>
+
+    <a href="#" class="gal-thumb">
+      <img src="images/01_babyshower.jpg" alt="Baby Shower" />
+      <div class="gal-thumb-overlay"></div>
+      <div class="gal-thumb-label">
+        <span class="gal-thumb-name">Baby Shower</span>
+        <span class="gal-thumb-count">Celebration · 2026</span>
+      </div>
+    </a>
+
+    <a href="#" class="gal-thumb">
+      <img src="images/02_sports_a.jpg" alt="Sports" />
+      <div class="gal-thumb-overlay"></div>
+      <div class="gal-thumb-label">
+        <span class="gal-thumb-name">Boxing Event</span>
+        <span class="gal-thumb-count">Sports & Action · 2026</span>
+      </div>
+    </a>
+
+    <a href="#" class="gal-thumb">
+      <img src="images/04_calivibes.jpg" alt="Calivibes" />
+      <div class="gal-thumb-overlay"></div>
+      <div class="gal-thumb-label">
+        <span class="gal-thumb-name">Calivibes</span>
+        <span class="gal-thumb-count">Culture & Lifestyle · 2026</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing" id="pricing">
+  <p class="section-label">Packages</p>
+  <h2 class="section-title">Photography Packages</h2>
+  <div class="pricing-grid">
+
+    <div class="price-card">
+      <p class="price-tier">Essential</p>
+      <div class="price-amount">$350</div>
+      <p class="price-unit">starting rate</p>
+      <ul class="price-features">
+        <li>Up to 2 hours of coverage</li>
+        <li>1 photographer</li>
+        <li>50+ edited digital images</li>
+        <li>Private online gallery</li>
+        <li>Personal use license</li>
+      </ul>
+      <a href="#contact" class="price-cta">Inquire →</a>
+    </div>
+
+    <div class="price-card featured">
+      <span class="price-badge">Most Popular</span>
+      <p class="price-tier">Standard</p>
+      <div class="price-amount">$650</div>
+      <p class="price-unit">starting rate</p>
+      <ul class="price-features">
+        <li>Up to 4 hours of coverage</li>
+        <li>1 photographer</li>
+        <li>150+ edited digital images</li>
+        <li>Private online gallery + download</li>
+        <li>Commercial use license</li>
+        <li>1-week turnaround</li>
+      </ul>
+      <a href="#contact" class="price-cta">Book This Package →</a>
+    </div>
+
+    <div class="price-card">
+      <p class="price-tier">Full Day</p>
+      <div class="price-amount">$1,200</div>
+      <p class="price-unit">starting rate</p>
+      <ul class="price-features">
+        <li>Up to 8 hours of coverage</li>
+        <li>1 photographer</li>
+        <li>300+ edited digital images</li>
+        <li>Private gallery + same-week preview</li>
+        <li>Commercial use license</li>
+        <li>Priority 3-day turnaround</li>
+        <li>Print-ready high-res files</li>
+      </ul>
+      <a href="#contact" class="price-cta">Inquire →</a>
+    </div>
+
+  </div>
+  <p class="price-note">Custom packages available for multi-day events, corporate contracts, and non-profits. All prices are starting rates — final quote based on event details.</p>
+</div>
+
 <!-- ABOUT -->
 <div class="about">
   <div class="about-image"><img src="images/04_calivibes.jpg" alt="Wayne B Photography" /></div>
@@ -220,13 +391,73 @@
   </div>
 </div>
 
-<!-- CONTACT -->
+<!-- CONTACT + BOOKING FORM -->
 <section class="contact" id="contact">
-  <p class="section-label">Get in Touch</p>
-  <h2 class="section-title">Let's capture your next event.</h2>
-  <p class="section-body">Tell me about your event — dates, location, what you need — and I'll get back within 24 hours.</p>
-  <a href="mailto:waynebphotography@gmail.com" class="contact-email">waynebphotography@gmail.com</a><br />
-  <a href="mailto:waynebphotography@gmail.com" class="btn" style="border-color:rgba(255,255,255,0.4)">Send an Enquiry</a>
+  <div class="contact-inner">
+
+    <div>
+      <p class="section-label">Book a Session</p>
+      <h2 class="section-title">Let's capture your next event.</h2>
+      <p class="section-body">Tell me about your event — dates, location, what you need — and I'll get back within 24 hours.</p>
+      <div class="contact-direct">
+        <div class="contact-direct-item">
+          <span class="contact-direct-label">Email</span>
+          <a href="mailto:wayne@hyperintell.org">wayne@hyperintell.org</a>
+        </div>
+        <div class="contact-direct-item">
+          <span class="contact-direct-label">Based in</span>
+          <span style="font-size:.875rem; color:rgba(255,255,255,.55);">San Diego, CA · Available Worldwide</span>
+        </div>
+        <div class="contact-direct-item">
+          <span class="contact-direct-label">Response time</span>
+          <span style="font-size:.875rem; color:rgba(255,255,255,.55);">Within 24 hours</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" action="mailto:wayne@hyperintell.org" method="post" enctype="text/plain">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+        </div>
+        <div class="form-field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="event-type">Event Type</label>
+          <select id="event-type" name="event_type">
+            <option value="">Select a category</option>
+            <option>Corporate / Organization</option>
+            <option>Birthday Celebration</option>
+            <option>Quinceañera</option>
+            <option>Baby Shower</option>
+            <option>Sports / Athletics</option>
+            <option>Culture & Lifestyle</option>
+            <option>Model / Portrait</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="event-date">Event Date</label>
+          <input type="date" id="event-date" name="event_date" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="location">Location / City</label>
+        <input type="text" id="location" name="location" placeholder="San Diego, CA" />
+      </div>
+      <div class="form-field">
+        <label for="message">Tell me about your event</label>
+        <textarea id="message" name="message" placeholder="Guest count, duration, vibe, any specific shots you want captured…"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+
+  </div>
 </section>
 
 <footer>
