@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "WcG4lmeCXL-rlFrM5OOog"
+uri = "file://wayne-b-photography-template.tar.gz"
+type = "unspecified"
+title = "Wayne B Photography — Site Template"
