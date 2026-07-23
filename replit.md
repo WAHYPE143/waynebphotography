@@ -32,6 +32,7 @@ Two-page photography portfolio:
 - Design: Inter font body, Georgia serif headlines, #0d0d0d near-black background, white text, 3px grid gaps
 - Hover zoom on all photo cells and masonry items
 - Mobile responsive (breakpoints at 768px and 480px)
+- Location: Los Angeles, CA
 - Domain: waynebphotography.com
 - Instagram: @waynebphoto
 - Email: waynebphotography@gmail.com

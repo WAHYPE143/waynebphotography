@@ -61,7 +61,7 @@ export default function Home() {
         <div className="hero-bg" />
         <div className="hero-overlay" />
         <div className="hero-content">
-          <p className="hero-eyebrow">Wayne B Photography &nbsp;·&nbsp; San Diego, CA</p>
+          <p className="hero-eyebrow">Wayne B Photography &nbsp;·&nbsp; Los Angeles, CA</p>
           <h1 className="hero-headline">Every moment<br />deserves to last.</h1>
           <p className="hero-sub">Professional Events Photography</p>
         </div>
@@ -87,7 +87,7 @@ export default function Home() {
                 <h2 className="featured-title">
                   Central Neighborhood Christian Health Residency Orientation
                 </h2>
-                <p className="featured-meta">San Diego, California &nbsp;·&nbsp; 9 Photos</p>
+                <p className="featured-meta">Los Angeles, California &nbsp;·&nbsp; 9 Photos</p>
               </div>
               <span className="featured-cta">
                 View Gallery
@@ -141,9 +141,9 @@ export default function Home() {
           </div>
           <div className="about-text">
             <p className="section-label">About</p>
-            <h2>Wayne B — San Diego's Event Photographer</h2>
+            <h2>Wayne B — LA's Event Photographer</h2>
             <p>
-              I'm Wayne B, a professional events photographer based in San Diego, CA.
+              I'm Wayne B, a professional events photographer based in Los Angeles, CA.
               I specialize in capturing the authentic emotion of life's most important
               moments — from intimate celebrations to large-scale corporate gatherings.
             </p>
@@ -173,7 +173,7 @@ export default function Home() {
         <div className="contact-inner">
           <p className="section-label">Get in Touch</p>
           <h2>Let's work together.</h2>
-          <p className="contact-sub">Available for bookings in San Diego and beyond</p>
+          <p className="contact-sub">Available for bookings in Los Angeles and beyond</p>
           <a
             href="mailto:waynebphotography@gmail.com"
             className="contact-email"
@@ -200,7 +200,7 @@ export default function Home() {
         <span className="footer-copy">
           © {new Date().getFullYear()} Wayne B Photography. All rights reserved.
         </span>
-        <span className="footer-copy">San Diego, CA</span>
+        <span className="footer-copy">Los Angeles, CA</span>
       </footer>
     </>
   );

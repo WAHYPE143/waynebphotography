@@ -105,7 +105,7 @@ export default function Gallery() {
           </h1>
           <div className="gallery-hero-meta">
             <span>June 26, 2026</span>
-            <span>San Diego, California</span>
+            <span>Los Angeles, California</span>
             <span>{PHOTOS.length} Photos</span>
           </div>
         </div>
