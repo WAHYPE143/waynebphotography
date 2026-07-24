@@ -1,0 +1,65 @@
+/* Shared shell for the client gallery pages — mirrors the tokens used on index.html */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:#0d0d0d; --white:#fff; --grey-1:#f5f5f3; --grey-2:#e8e8e4; --grey-3:#999996; --grey-4:#555552;
+  --font:'Inter','Helvetica Neue',Arial,sans-serif; --serif:'Georgia','Times New Roman',serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Nav ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.25rem 2.5rem; background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--grey-2); }
+.nav-logo { font-size:.875rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+.nav-links { display:flex; gap:2rem; list-style:none; font-size:.8125rem; letter-spacing:.08em; text-transform:uppercase; color:var(--grey-4); }
+.nav-links a:hover, .nav-links a.active { color:var(--black); }
+.nav-links a.active { border-bottom:1.5px solid var(--black); padding-bottom:1px; }
+.nav-back { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--grey-4); display:flex; align-items:center; gap:.5rem; }
+.nav-back:hover { color:var(--black); }
+
+/* ── Page head ── */
+.page-hero { margin-top:62px; background:var(--black); color:var(--white); padding:4rem 2.5rem 3rem; }
+.page-label { font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase; opacity:.5; margin-bottom:.75rem; }
+.page-title { font-family:var(--serif); font-size:clamp(1.75rem,4vw,3rem); font-weight:400; line-height:1.15; margin-bottom:.9rem; }
+.page-sub { font-size:.9375rem; line-height:1.7; color:rgba(255,255,255,0.55); max-width:520px; }
+.page-meta { font-size:.8125rem; color:rgba(255,255,255,0.5); letter-spacing:.05em; }
+
+/* ── Buttons ── */
+.btn-drive { display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1.5rem; background:var(--black); color:var(--white); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; transition:opacity .2s; border:1px solid var(--black); }
+.btn-drive:hover { opacity:.75; }
+.btn-drive.on-dark { background:var(--white); color:var(--black); border-color:var(--white); }
+
+/* ── State blocks ── */
+.state { padding:4rem 2.5rem; text-align:center; color:var(--grey-4); }
+.state-title { font-family:var(--serif); font-size:1.25rem; color:var(--black); margin-bottom:.6rem; font-weight:400; }
+.state-body { font-size:.875rem; line-height:1.7; max-width:440px; margin:0 auto 1.75rem; }
+.state[hidden] { display:none; }
+.skeleton-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:3px; padding:0 2.5rem 3rem; }
+.skeleton-cell { height:220px; background:var(--grey-1); animation:pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.55; } }
+
+.notice { font-size:.75rem; color:var(--grey-3); letter-spacing:.02em; padding:0 2.5rem 1.5rem; }
+
+/* ── Lightbox (created by createLightbox() in galleries.js) ── */
+.lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000; align-items:center; justify-content:center; }
+.lightbox.active { display:flex; }
+.lightbox img { max-width:90vw; max-height:88vh; object-fit:contain; }
+.lightbox-close { position:absolute; top:1.25rem; right:1.75rem; background:none; border:none; color:#fff; font-size:2rem; line-height:1; cursor:pointer; opacity:.7; }
+.lightbox-close:hover { opacity:1; }
+.lightbox-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.1); color:#fff; border:none; padding:1rem 1.25rem; font-size:1.25rem; cursor:pointer; }
+.lightbox-nav:hover { background:rgba(255,255,255,.2); }
+.lightbox-prev { left:1rem; }
+.lightbox-next { right:1rem; }
+.lightbox-caption { position:absolute; bottom:1.25rem; left:0; right:0; text-align:center; font-size:.6875rem; letter-spacing:.14em; color:rgba(255,255,255,.5); }
+
+footer { padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; border-top:1px solid var(--grey-2); font-size:.75rem; color:var(--grey-3); }
+
+@media (max-width:768px) {
+  nav { padding:1rem 1.25rem; }
+  .nav-links { gap:.85rem; font-size:.6875rem; flex-wrap:wrap; justify-content:flex-end; }
+  .page-hero { padding:3rem 1.25rem 2.25rem; }
+  .state, .notice, .skeleton-grid { padding-left:1.25rem; padding-right:1.25rem; }
+  footer { flex-direction:column; text-align:center; }
+}

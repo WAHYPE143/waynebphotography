@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Galleries — Wayne B Photography</title>
+  <meta name="description" content="Private client galleries from Wayne B Photography — browse and download the edited photos from your event." />
+  <link rel="stylesheet" href="assets/galleries.css" />
+  <style>
+    .galleries-wrap { padding:3rem 2.5rem 4rem; }
+    .galleries-head { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; }
+    .galleries-count { font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--grey-3); }
+
+    .gallery-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:3px; }
+    .gallery-card { position:relative; display:block; height:300px; overflow:hidden; background:var(--grey-1); }
+    .gallery-card img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.25,.46,.45,.94); }
+    .gallery-card:hover img { transform:scale(1.045); }
+    .gallery-card-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0) 58%); transition:background .3s; }
+    .gallery-card:hover .gallery-card-overlay { background:linear-gradient(to top,rgba(0,0,0,0.84) 0%,rgba(0,0,0,0.08) 62%); }
+    .gallery-card-label { position:absolute; bottom:0; left:0; right:0; padding:1.25rem 1.25rem 1.1rem; }
+    .gallery-card-name { display:block; font-family:var(--serif); font-size:1.125rem; color:#fff; margin-bottom:.3rem; }
+    .gallery-card-meta { display:block; font-size:.625rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+    .gallery-card-empty { display:flex; align-items:center; justify-content:center; height:100%; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--grey-3); }
+
+    .how-it-works { background:var(--grey-1); padding:3.5rem 2.5rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2.5rem; }
+    .step-num { font-size:.6rem; letter-spacing:.18em; color:var(--grey-3); margin-bottom:.9rem; display:block; }
+    .step-name { font-family:var(--serif); font-size:1.125rem; font-weight:400; margin-bottom:.5rem; }
+    .step-desc { font-size:.8125rem; line-height:1.7; color:var(--grey-4); }
+
+    @media (max-width:768px) {
+      .galleries-wrap { padding:2rem 1.25rem 3rem; }
+      .how-it-works { padding:2.5rem 1.25rem; gap:2rem; }
+      .gallery-card { height:240px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Wayne B Photography</a>
+  <ul class="nav-links">
+    <li><a href="index.html#gallery">Portfolio</a></li>
+    <li><a href="index.html#events">Events</a></li>
+    <li><a href="client-galleries.html" class="active">Client Galleries</a></li>
+    <li><a href="index.html#contact">Book</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <p class="page-label">Client Galleries</p>
+  <h1 class="page-title">Your photos, ready<br>to view and download.</h1>
+  <p class="page-sub">Every booking gets its own gallery. Browse the edited set here, then download the full-resolution files straight from Drive — originals stay available, nothing expires.</p>
+</div>
+
+<div class="galleries-wrap">
+  <div class="galleries-head">
+    <span class="galleries-count" id="galleries-count">Loading galleries…</span>
+    <a class="btn-drive" id="drive-root-link" href="https://drive.google.com/drive/folders/108HdgZoiORmD3pswZS3ElaZh2Ur3yJHt" target="_blank" rel="noopener">↗ Open all galleries in Drive</a>
+  </div>
+
+  <div class="gallery-cards" id="gallery-cards">
+    <!-- Curated event gallery that ships with the site; Drive galleries are appended below it. -->
+    <a href="cnhf-gallery.html" class="gallery-card">
+      <img src="https://lh3.googleusercontent.com/d/1UwTNet9aZxlaKwz1cnzbJIVNbjQsXUGg=w800" alt="CNCH Residency Orientation" loading="lazy" />
+      <div class="gallery-card-overlay"></div>
+      <div class="gallery-card-label">
+        <span class="gallery-card-name">CNCH Residency Orientation</span>
+        <span class="gallery-card-meta">Corporate · June 2026</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="skeleton-grid" id="skeleton">
+    <div class="skeleton-cell"></div>
+    <div class="skeleton-cell"></div>
+    <div class="skeleton-cell"></div>
+  </div>
+
+  <div class="state" id="fallback" hidden>
+    <h2 class="state-title">Galleries live on Google Drive</h2>
+    <p class="state-body">The gallery list could not be loaded right now. Everything is still available in the shared Drive folder — open it below to view or download your photos.</p>
+    <a class="btn-drive" href="https://drive.google.com/drive/folders/108HdgZoiORmD3pswZS3ElaZh2Ur3yJHt" target="_blank" rel="noopener">↗ Open in Google Drive</a>
+  </div>
+</div>
+
+<div class="how-it-works">
+  <div>
+    <span class="step-num">01</span>
+    <h3 class="step-name">Find your gallery</h3>
+    <p class="step-desc">Galleries are named for the event and the month it was shot. Pick yours from the grid above.</p>
+  </div>
+  <div>
+    <span class="step-num">02</span>
+    <h3 class="step-name">Browse the edit</h3>
+    <p class="step-desc">Every gallery shows the full edited set. Click any frame to open it large, then use the arrow keys to move through the set.</p>
+  </div>
+  <div>
+    <span class="step-num">03</span>
+    <h3 class="step-name">Download originals</h3>
+    <p class="step-desc">Use the download link inside the gallery to pull full-resolution files from Drive — single photos or the whole folder as a zip.</p>
+  </div>
+  <div>
+    <span class="step-num">04</span>
+    <h3 class="step-name">Need something else?</h3>
+    <p class="step-desc">Retouching, prints, or a missing frame — <a href="index.html#contact" style="border-bottom:1px solid var(--grey-3);">get in touch</a> and it gets sorted.</p>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Wayne B Photography. All rights reserved.</span>
+  <a href="index.html#contact">Book a session</a>
+</footer>
+
+<script type="module">
+  import { loadFolder, photoUrl, photoSrcset, el, photoCountLabel } from './assets/galleries.js'
+
+  const cards = document.getElementById('gallery-cards')
+  const countLabel = document.getElementById('galleries-count')
+  const skeleton = document.getElementById('skeleton')
+  const fallback = document.getElementById('fallback')
+  const rootLink = document.getElementById('drive-root-link')
+
+  function card({ href, coverId, name, meta }) {
+    const link = el('a', 'gallery-card')
+    link.href = href
+    if (coverId) {
+      const img = el('img')
+      img.src = photoUrl(coverId, 800)
+      img.srcset = photoSrcset(coverId)
+      img.sizes = '(max-width: 768px) 100vw, 33vw'
+      img.alt = name
+      img.loading = 'lazy'
+      link.appendChild(img)
+    } else {
+      link.appendChild(el('span', 'gallery-card-empty', 'View gallery'))
+    }
+    link.appendChild(el('div', 'gallery-card-overlay'))
+    const label = el('div', 'gallery-card-label')
+    label.append(el('span', 'gallery-card-name', name), el('span', 'gallery-card-meta', meta))
+    link.appendChild(label)
+    return link
+  }
+
+  async function render() {
+    let root
+    try {
+      root = await loadFolder()
+    } catch {
+      skeleton.remove()
+      fallback.hidden = false
+      countLabel.textContent = '1 gallery'
+      return
+    }
+
+    skeleton.remove()
+    if (root.driveUrl) rootLink.href = root.driveUrl
+
+    if (!root.available) {
+      fallback.hidden = false
+      countLabel.textContent = '1 gallery'
+      return
+    }
+
+    // A folder of folders means one gallery per subfolder; a folder of photos is
+    // a single gallery in its own right.
+    if (root.folders.length) {
+      const details = await Promise.all(
+        root.folders.map((folder) => loadFolder(folder.id).catch(() => null)),
+      )
+      root.folders.forEach((folder, i) => {
+        const listing = details[i]
+        cards.appendChild(
+          card({
+            href: `gallery.html?g=${encodeURIComponent(folder.id)}`,
+            coverId: listing?.photos?.[0]?.id,
+            name: folder.name,
+            meta: photoCountLabel(listing?.photos?.length),
+          }),
+        )
+      })
+    } else if (root.photos.length) {
+      cards.appendChild(
+        card({
+          href: `gallery.html?g=${encodeURIComponent(root.folderId)}`,
+          coverId: root.photos[0].id,
+          name: root.name || 'Latest gallery',
+          meta: photoCountLabel(root.photos.length),
+        }),
+      )
+    }
+
+    const total = cards.querySelectorAll('.gallery-card').length
+    countLabel.textContent = `${total} galler${total === 1 ? 'y' : 'ies'}`
+  }
+
+  render()
+</script>
+</body>
+</html>
