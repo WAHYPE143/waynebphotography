@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Gallery — Wayne B Photography</title>
+  <meta name="description" content="Client gallery — view and download your edited photos from Wayne B Photography." />
+  <!-- Client photos stay out of search results; the gallery is shared by link. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="assets/galleries.css" />
+  <style>
+    .gallery-wrap { padding:2.5rem 2.5rem 4rem; }
+    .gallery-info { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem; }
+    .photo-count { font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--grey-3); }
+
+    .masonry { columns:3; column-gap:3px; }
+    @media (max-width:900px) { .masonry { columns:2; } }
+    @media (max-width:520px) { .masonry { columns:1; } }
+
+    .photo-item { break-inside:avoid; margin-bottom:3px; overflow:hidden; position:relative; background:var(--grey-1); cursor:zoom-in; }
+    .photo-item:focus-visible { outline:2px solid var(--black); outline-offset:2px; }
+    .photo-item img { display:block; width:100%; height:auto; transition:transform .45s cubic-bezier(.25,.46,.45,.94); }
+    .photo-item:hover img { transform:scale(1.03); }
+
+    @media (max-width:768px) { .gallery-wrap { padding:2rem 1.25rem 3rem; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Wayne B Photography</a>
+  <a href="client-galleries.html" class="nav-back">← All galleries</a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-label" id="gallery-label">Client Gallery</p>
+  <h1 class="page-title" id="gallery-title">Loading gallery…</h1>
+  <p class="page-meta" id="gallery-meta">Photography by Wayne B</p>
+</div>
+
+<div class="gallery-wrap">
+  <div class="gallery-info">
+    <span class="photo-count" id="photo-count">Fetching photos…</span>
+    <a class="btn-drive" id="drive-link" href="https://drive.google.com/drive/folders/108HdgZoiORmD3pswZS3ElaZh2Ur3yJHt" target="_blank" rel="noopener">↗ View &amp; download all</a>
+  </div>
+
+  <div class="masonry" id="gallery"></div>
+
+  <div class="skeleton-grid" id="skeleton" style="padding-left:0; padding-right:0;">
+    <div class="skeleton-cell"></div>
+    <div class="skeleton-cell"></div>
+    <div class="skeleton-cell"></div>
+    <div class="skeleton-cell"></div>
+    <div class="skeleton-cell"></div>
+    <div class="skeleton-cell"></div>
+  </div>
+
+  <div class="state" id="fallback" hidden>
+    <h2 class="state-title" id="fallback-title">Photos are on Google Drive</h2>
+    <p class="state-body" id="fallback-body">The previews could not be loaded right now. Open the folder in Drive to view every photo and download the full-resolution files.</p>
+    <a class="btn-drive" id="fallback-link" href="https://drive.google.com/drive/folders/108HdgZoiORmD3pswZS3ElaZh2Ur3yJHt" target="_blank" rel="noopener">↗ Open in Google Drive</a>
+  </div>
+</div>
+
+<p class="notice" id="updated-note" hidden></p>
+
+<footer>
+  <span>© 2026 Wayne B Photography. All rights reserved.</span>
+  <a href="index.html#contact">Book a session</a>
+</footer>
+
+<script type="module">
+  import { loadFolder, photoUrl, photoSrcset, el, createLightbox } from './assets/galleries.js'
+
+  const params = new URLSearchParams(location.search)
+  const folderId = params.get('g') || ''
+
+  const titleEl = document.getElementById('gallery-title')
+  const metaEl = document.getElementById('gallery-meta')
+  const countEl = document.getElementById('photo-count')
+  const galleryEl = document.getElementById('gallery')
+  const skeleton = document.getElementById('skeleton')
+  const fallback = document.getElementById('fallback')
+  const driveLink = document.getElementById('drive-link')
+  const fallbackLink = document.getElementById('fallback-link')
+  const updatedNote = document.getElementById('updated-note')
+
+  function showFallback(title, body) {
+    skeleton.remove()
+    if (title) document.getElementById('fallback-title').textContent = title
+    if (body) document.getElementById('fallback-body').textContent = body
+    fallback.hidden = false
+  }
+
+  function setDriveUrl(url) {
+    if (!url) return
+    driveLink.href = url
+    fallbackLink.href = url
+  }
+
+  async function render() {
+    let listing
+    try {
+      listing = await loadFolder(folderId)
+    } catch {
+      titleEl.textContent = 'Client Gallery'
+      countEl.textContent = ''
+      showFallback()
+      return
+    }
+
+    setDriveUrl(listing.driveUrl)
+    titleEl.textContent = listing.name || 'Client Gallery'
+    document.title = `${listing.name || 'Client Gallery'} — Wayne B Photography`
+
+    // A folder of folders is a collection, not a gallery — send those back to the index.
+    if (listing.available && !listing.photos.length && listing.folders.length) {
+      location.replace('client-galleries.html')
+      return
+    }
+
+    if (!listing.available || !listing.photos.length) {
+      countEl.textContent = ''
+      metaEl.textContent = 'Photography by Wayne B'
+      showFallback(
+        listing.available ? 'No photos in this gallery yet' : undefined,
+        listing.available
+          ? 'This gallery is set up but the photos have not landed yet. Check back shortly, or open the Drive folder directly.'
+          : undefined,
+      )
+      return
+    }
+
+    skeleton.remove()
+    const photos = listing.photos
+    countEl.textContent = `${photos.length} photo${photos.length === 1 ? '' : 's'}`
+    metaEl.textContent = 'Click any photo to view it large · Arrow keys to browse'
+
+    const lightbox = createLightbox()
+    lightbox.setPhotos(photos)
+
+    photos.forEach((photo, i) => {
+      const item = el('div', 'photo-item')
+      item.setAttribute('role', 'button')
+      item.tabIndex = 0
+      item.setAttribute('aria-label', `Open photo ${i + 1} of ${photos.length}`)
+      const img = el('img')
+      img.src = photoUrl(photo.id, 1200)
+      img.srcset = photoSrcset(photo.id)
+      img.sizes = '(max-width: 520px) 100vw, (max-width: 900px) 50vw, 33vw'
+      img.alt = photo.name || `Gallery photo ${i + 1}`
+      img.loading = i < 6 ? 'eager' : 'lazy'
+      item.appendChild(img)
+      item.addEventListener('click', () => lightbox.open(i))
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          lightbox.open(i)
+        }
+      })
+      galleryEl.appendChild(item)
+    })
+
+    if (listing.stale) {
+      updatedNote.textContent = 'Showing the last synced version of this gallery.'
+      updatedNote.hidden = false
+    }
+  }
+
+  render()
+</script>
+</body>
+</html>

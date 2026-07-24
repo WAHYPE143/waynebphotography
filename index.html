@@ -140,7 +140,7 @@
     footer { padding:2rem 2.5rem; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--grey-2); font-size:.75rem; color:var(--grey-3); }
 
     @media (max-width:768px) {
-      nav { padding:1rem 1.25rem; } .nav-links { gap:1.25rem; }
+      nav { padding:1rem 1.25rem; } .nav-links { gap:.85rem; font-size:.6875rem; flex-wrap:wrap; justify-content:flex-end; }
       section { padding:3.5rem 1.25rem; }
       .gallery-header,.gallery-grid { padding-left:1.25rem; padding-right:1.25rem; }
       .grid-row-1 { grid-template-columns:1fr; grid-template-rows:260px 200px 200px; }
@@ -173,6 +173,7 @@
   <ul class="nav-links">
     <li><a href="#gallery">Portfolio</a></li>
     <li><a href="#events" class="active">Events</a></li>
+    <li><a href="client-galleries.html">Client Galleries</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Book</a></li>
   </ul>
@@ -273,6 +274,7 @@
 <div class="galleries-strip" id="events">
   <p class="section-label">Browse by Event</p>
   <h2 class="section-title">Event Galleries</h2>
+  <a href="client-galleries.html" class="feat-link" style="margin-top:.25rem;">Client? Find your gallery →</a>
   <div class="galleries-grid">
 
     <a href="cnhf-gallery.html" class="gal-thumb">
