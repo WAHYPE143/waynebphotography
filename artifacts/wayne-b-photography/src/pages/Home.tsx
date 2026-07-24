@@ -63,7 +63,7 @@ export default function Home() {
         <div className="hero-content">
           <p className="hero-eyebrow">Wayne B Photography &nbsp;·&nbsp; Los Angeles, CA</p>
           <h1 className="hero-headline">Every moment<br />deserves to last.</h1>
-          <p className="hero-sub">Professional Events Photography</p>
+          <p className="hero-sub">Professional Headshot Photography</p>
         </div>
       </section>
 
@@ -141,17 +141,17 @@ export default function Home() {
           </div>
           <div className="about-text">
             <p className="section-label">About</p>
-            <h2>Wayne B — LA's Event Photographer</h2>
+            <h2>Wayne B — LA's Headshot Photographer</h2>
             <p>
-              I'm Wayne B, a professional events photographer based in Los Angeles, CA.
-              I specialize in capturing the authentic emotion of life's most important
-              moments — from intimate celebrations to large-scale corporate gatherings.
+              I'm Wayne B, a professional headshot photographer based in Los Angeles, CA.
+              I specialize in capturing portraits that feel authentic — images that
+              represent who you are and open doors.
             </p>
             <p>
               Every frame I capture tells a story. My editorial approach focuses on
-              real moments, genuine connections, and the energy that makes each event
-              unique. Whether it's a quinceañera in National City or a corporate
-              orientation downtown, I bring the same intention and craft to every shoot.
+              real expressions, genuine confidence, and the presence that makes each
+              headshot unforgettable. Whether it's an actor, entrepreneur, or creative
+              professional, I bring the same intention and craft to every shoot.
             </p>
             <p>
               Follow along on Instagram{" "}
