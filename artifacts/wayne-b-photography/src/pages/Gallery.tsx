@@ -12,7 +12,10 @@ import { Link } from "wouter";
  * Drive folder URL: replace FOLDER_ID below with your actual folder ID.
  */
 const DRIVE_FOLDER_URL =
-  "https://drive.google.com/drive/folders/REPLACE_WITH_YOUR_FOLDER_ID";
+  "https://drive.google.com/drive/folders/1tUGf4DqYsY5ovtd00DB2MZZ0kvYDzQ2q?usp=drive_link";
+
+const DRIVE_EMBED_URL =
+  "https://drive.google.com/embeddedfolderview?id=1tUGf4DqYsY5ovtd00DB2MZZ0kvYDzQ2q#grid";
 
 const makeThumb = (fileId: string, width = 1200) =>
   `https://lh3.googleusercontent.com/d/${fileId}=w${width}`;
@@ -168,6 +171,19 @@ export default function Gallery() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* GOOGLE DRIVE EMBED */}
+          <div className="drive-embed-section">
+            <p className="section-label" style={{ marginBottom: "1.5rem" }}>All Photos — Google Drive</p>
+            <div className="drive-embed-wrap">
+              <iframe
+                src={DRIVE_EMBED_URL}
+                title="Google Drive Photo Gallery"
+                allowFullScreen
+                className="drive-embed-frame"
+              />
+            </div>
           </div>
 
           {/* VIEW ALL BUTTON */}
