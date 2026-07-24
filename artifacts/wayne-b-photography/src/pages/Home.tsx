@@ -123,7 +123,7 @@ export default function Home() {
             </div>
             <div className="featured-info">
               <div>
-                <p className="featured-tag">Collective &nbsp;·&nbsp; Editorial</p>
+                <p className="featured-tag">Collective &nbsp;·&nbsp; Editorial &nbsp;·&nbsp; 2021–2026</p>
                 <h2 className="featured-title">Badé Collective</h2>
                 <p className="featured-meta">
                   A creative collective rooted in Black American culture — music, fashion,
@@ -131,7 +131,7 @@ export default function Home() {
                 </p>
               </div>
               <span className="featured-cta">
-                Visit badecollective.com
+                View Portfolio
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.2">
                   <line x1="0" y1="6" x2="14" y2="6"/>
                   <polyline points="9 1 14 6 9 11"/>
@@ -139,6 +139,31 @@ export default function Home() {
               </span>
             </div>
           </a>
+        </div>
+      </section>
+
+      {/* BADÉ PROJECTS EMBED */}
+      <section className="bade-embed-section">
+        <div className="bade-embed-inner">
+          <div className="bade-embed-header">
+            <p className="section-label">Badé Collective — Portfolio 2021–2026</p>
+            <a
+              href="https://badecollective.com/projects"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bade-embed-link"
+            >
+              Open full site ↗
+            </a>
+          </div>
+          <div className="bade-embed-frame-wrap">
+            <iframe
+              src="https://badecollective.com/projects"
+              title="Badé Collective Projects"
+              className="bade-embed-frame"
+              allowFullScreen
+            />
+          </div>
         </div>
       </section>
 

@@ -349,6 +349,55 @@ section {
   color: rgba(255,255,255,0.4);
 }
 
+/* ── BADÉ EMBED ───────────────────────────────────────── */
+.bade-embed-section {
+  background: #080808;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 64px 0 0;
+}
+
+.bade-embed-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 0;
+}
+
+.bade-embed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.bade-embed-link {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #e8192c;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.bade-embed-link:hover {
+  opacity: 0.7;
+}
+
+.bade-embed-frame-wrap {
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.bade-embed-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #080808;
+}
+
 /* ── GALLERY GRID ─────────────────────────────────────── */
 .gallery-grid-section {
   background: var(--black);
