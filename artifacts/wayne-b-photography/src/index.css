@@ -281,6 +281,74 @@ section {
   gap: 18px;
 }
 
+/* ── BADÉ COLLECTIVE CARD ─────────────────────────────── */
+.bade-featured {
+  border-top: none;
+  padding-top: 0;
+}
+
+.bade-card {
+  text-decoration: none;
+}
+
+.bade-image {
+  background: #080808;
+  position: relative;
+  overflow: hidden;
+}
+
+.bade-bg-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  opacity: 0.35;
+}
+
+.bade-bg-cell {
+  background: linear-gradient(135deg, #1a0808 0%, #0d0d0d 100%);
+  transition: background 0.5s;
+}
+
+.bade-card:hover .bade-bg-cell:nth-child(1) { background: #1a0d0d; }
+.bade-card:hover .bade-bg-cell:nth-child(3) { background: #0d1a0d; }
+.bade-card:hover .bade-bg-cell:nth-child(5) { background: #2a0a0a; }
+.bade-card:hover .bade-bg-cell:nth-child(7) { background: #0d0d1a; }
+.bade-card:hover .bade-bg-cell:nth-child(9) { background: #1a1a0d; }
+
+.bade-logo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.bade-logo-text {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.bade-accent {
+  color: #e8192c;
+}
+
+.bade-sub-text {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
 /* ── GALLERY GRID ─────────────────────────────────────── */
 .gallery-grid-section {
   background: var(--black);

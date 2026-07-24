@@ -101,6 +101,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* BADÉ COLLECTIVE CARD */}
+      <section className="featured bade-featured">
+        <div className="featured-inner">
+          <a
+            href="https://badecollective.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="featured-card bade-card"
+          >
+            <div className="featured-image bade-image">
+              <div className="bade-bg-grid">
+                {[...Array(9)].map((_, i) => (
+                  <div key={i} className="bade-bg-cell" />
+                ))}
+              </div>
+              <div className="bade-logo-overlay">
+                <span className="bade-logo-text">BAD<span className="bade-accent">É</span></span>
+                <span className="bade-sub-text">Black American Domestic Export</span>
+              </div>
+            </div>
+            <div className="featured-info">
+              <div>
+                <p className="featured-tag">Collective &nbsp;·&nbsp; Editorial</p>
+                <h2 className="featured-title">Badé Collective</h2>
+                <p className="featured-meta">
+                  A creative collective rooted in Black American culture — music, fashion,
+                  and documentary work across Los Angeles.
+                </p>
+              </div>
+              <span className="featured-cta">
+                Visit badecollective.com
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.2">
+                  <line x1="0" y1="6" x2="14" y2="6"/>
+                  <polyline points="9 1 14 6 9 11"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
+
       {/* GALLERY GRID */}
       <section className="gallery-grid-section">
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
