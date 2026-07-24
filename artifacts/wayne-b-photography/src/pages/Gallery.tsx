@@ -1,44 +1,43 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "wouter";
 
-/*
- * CNHF Gallery Photos
- * Replace each `src` value with your actual lh3.googleusercontent.com thumbnail URL.
- * Format: https://lh3.googleusercontent.com/d/GOOGLE_DRIVE_FILE_ID=w1200
- *
- * To get a file ID: open the file in Google Drive → Share → Copy link
- * The ID is the long string between /d/ and /view in the URL.
- *
- * Drive folder URL: replace FOLDER_ID below with your actual folder ID.
- */
-const DRIVE_FOLDER_URL =
-  "https://drive.google.com/drive/folders/1tUGf4DqYsY5ovtd00DB2MZZ0kvYDzQ2q?usp=drive_link";
+const FOLDER_ID = "1_bw9AstwZWO8Sfs2Di5-2GyESaBi7NCi";
+const DRIVE_FOLDER_URL = `https://drive.google.com/drive/folders/${FOLDER_ID}?usp=sharing`;
+const DRIVE_EMBED_URL = `https://drive.google.com/embeddedfolderview?id=${FOLDER_ID}#grid`;
 
-const DRIVE_EMBED_URL =
-  "https://drive.google.com/embeddedfolderview?id=1tUGf4DqYsY5ovtd00DB2MZZ0kvYDzQ2q#grid";
-
-const makeThumb = (fileId: string, width = 1200) =>
-  `https://lh3.googleusercontent.com/d/${fileId}=w${width}`;
-
-const PHOTOS = [
-  { id: 1, src: makeThumb("PHOTO_FILE_ID_1"), alt: "CNHF Residency Orientation — 1" },
-  { id: 2, src: makeThumb("PHOTO_FILE_ID_2"), alt: "CNHF Residency Orientation — 2" },
-  { id: 3, src: makeThumb("PHOTO_FILE_ID_3"), alt: "CNHF Residency Orientation — 3" },
-  { id: 4, src: makeThumb("PHOTO_FILE_ID_4"), alt: "CNHF Residency Orientation — 4" },
-  { id: 5, src: makeThumb("PHOTO_FILE_ID_5"), alt: "CNHF Residency Orientation — 5" },
-  { id: 6, src: makeThumb("PHOTO_FILE_ID_6"), alt: "CNHF Residency Orientation — 6" },
-  { id: 7, src: makeThumb("PHOTO_FILE_ID_7"), alt: "CNHF Residency Orientation — 7" },
-  { id: 8, src: makeThumb("PHOTO_FILE_ID_8"), alt: "CNHF Residency Orientation — 8" },
-  { id: 9, src: makeThumb("PHOTO_FILE_ID_9"), alt: "CNHF Residency Orientation — 9" },
+// Parsed from Drive folder — CNHF Residency Orientation headshots
+const PEOPLE = [
+  { num: "01", name: "Samuel Yoo",          title: "MD"   },
+  { num: "02", name: "Bereket Gebreslasie", title: "MD"   },
+  { num: "03", name: "Joshua Dang",         title: "MD"   },
+  { num: "04", name: "Daniel Pryor",        title: ""     },
+  { num: "05", name: "Roberto Madrid",      title: "MD"   },
+  { num: "06", name: "Breanna Montes",      title: ""     },
+  { num: "07", name: "Nicole Villacreses",  title: ""     },
+  { num: "08", name: "Angela Duran",        title: ""     },
+  { num: "09", name: "Pamala Molina",       title: "LCSW" },
+  { num: "10", name: "Renne Aldestein",     title: ""     },
+  { num: "11", name: "Chelsea Grenfell",    title: "ACSW" },
+  { num: "12", name: "Michael Guitron",     title: ""     },
+  { num: "13", name: "Alejandra Vega",      title: "LCSW" },
+  { num: "14", name: "Jared Peralta",       title: "MD"   },
+  { num: "15", name: "Marlena Arredondo",   title: "ACSW" },
+  { num: "16", name: "Nicole Opara",        title: "ACSW" },
+  { num: "17", name: "Isaac Kim",           title: "MD"   },
+  { num: "18", name: "Fadi Soliman",        title: "MD"   },
+  { num: "19", name: "Ashley Cano",         title: ""     },
 ];
 
-const PLACEHOLDER_HEIGHTS = [320, 240, 280, 360, 220, 300, 260, 340, 280];
+function formatName(p: typeof PEOPLE[number]) {
+  const prefix = p.title === "MD" ? "Dr. " : "";
+  const suffix = p.title && p.title !== "MD" ? `, ${p.title}` : "";
+  return { prefix, base: p.name, suffix };
+}
 
 export default function Gallery() {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [loaded, setLoaded] = useState<boolean[]>(Array(PHOTOS.length).fill(false));
-  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -46,38 +45,10 @@ export default function Gallery() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const openLightbox = (index: number) => setLightboxIndex(index);
-  const closeLightbox = () => setLightboxIndex(null);
-
-  const prev = useCallback(() => {
-    setLightboxIndex(i => (i === null ? null : (i - 1 + PHOTOS.length) % PHOTOS.length));
-  }, []);
-
-  const next = useCallback(() => {
-    setLightboxIndex(i => (i === null ? null : (i + 1) % PHOTOS.length));
-  }, []);
-
-  useEffect(() => {
-    if (lightboxIndex === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft")  prev();
-      if (e.key === "ArrowRight") next();
-      if (e.key === "Escape")     closeLightbox();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [lightboxIndex, prev, next]);
-
-  useEffect(() => {
-    document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [lightboxIndex]);
-
-  const markLoaded = (i: number) => {
-    setLoaded(prev => { const n = [...prev]; n[i] = true; return n; });
-  };
-
-  const isRealUrl = (url: string) => !url.includes("PHOTO_FILE_ID");
+  const filtered = PEOPLE.filter(p =>
+    p.name.toLowerCase().includes(search.toLowerCase()) ||
+    p.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <>
@@ -101,105 +72,109 @@ export default function Gallery() {
       {/* GALLERY HERO */}
       <div className="gallery-hero">
         <div className="gallery-hero-inner">
-          <p className="gallery-hero-tag">Corporate Event Gallery</p>
+          <p className="gallery-hero-tag">Headshots &nbsp;·&nbsp; Corporate Gallery</p>
           <h1 className="gallery-hero-title">
-            Central Neighborhood Christian Health<br />
-            Residency Orientation
+            Central Neighborhood Christian<br />
+            Health — Residency Orientation
           </h1>
           <div className="gallery-hero-meta">
             <span>June 26, 2026</span>
             <span>Los Angeles, California</span>
-            <span>{PHOTOS.length} Photos</span>
+            <span>{PEOPLE.length} Subjects</span>
           </div>
         </div>
       </div>
 
-      {/* MASONRY GALLERY */}
-      <div className="gallery-masonry-section">
-        <div className="gallery-masonry-inner">
-          <div className="masonry-grid">
-            {PHOTOS.map((photo, i) => (
-              <div
-                key={photo.id}
-                className="masonry-item"
-                onClick={() => openLightbox(i)}
-                role="button"
-                tabIndex={0}
-                aria-label={photo.alt}
-                onKeyDown={e => e.key === "Enter" && openLightbox(i)}
-              >
-                {isRealUrl(photo.src) ? (
-                  <img
-                    src={photo.src}
-                    alt={photo.alt}
-                    loading="lazy"
-                    onLoad={() => markLoaded(i)}
-                    style={{ opacity: loaded[i] ? 1 : 0, transition: "opacity 0.4s" }}
-                  />
-                ) : (
-                  <div
-                    className="masonry-item-placeholder"
-                    style={{ height: PLACEHOLDER_HEIGHTS[i] }}
-                  >
-                    <div style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: 12,
-                      opacity: 0.25,
-                    }}>
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                      </svg>
-                      <span style={{ fontSize: 10, letterSpacing: "0.15em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>
-                        Photo {i + 1}
-                      </span>
-                    </div>
-                  </div>
-                )}
-                <div className="masonry-overlay">
-                  <div className="masonry-expand">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                      <polyline points="15 3 21 3 21 9"/>
-                      <polyline points="9 21 3 21 3 15"/>
-                      <line x1="21" y1="3" x2="14" y2="10"/>
-                      <line x1="3" y1="21" x2="10" y2="14"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* PEOPLE DIRECTORY */}
+      <div className="hs-section">
+        <div className="hs-inner">
 
-          {/* GOOGLE DRIVE EMBED */}
-          <div className="drive-embed-section">
-            <p className="section-label" style={{ marginBottom: "1.5rem" }}>All Photos — Google Drive</p>
-            <div className="drive-embed-wrap">
-              <iframe
-                src={DRIVE_EMBED_URL}
-                title="Google Drive Photo Gallery"
-                allowFullScreen
-                className="drive-embed-frame"
+          {/* SEARCH */}
+          <div className="hs-search-row">
+            <p className="section-label">Resident Directory</p>
+            <div className="hs-search-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input
+                className="hs-search"
+                type="text"
+                placeholder="Search by name or title…"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
               />
             </div>
           </div>
 
-          {/* VIEW ALL BUTTON */}
-          <div className="gallery-actions">
-            <a
-              href={DRIVE_FOLDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-view-all"
-            >
-              View & Download All
+          {/* GRID */}
+          <div className="hs-grid">
+            {filtered.map(p => {
+              const { prefix, base, suffix } = formatName(p);
+              return (
+                <a
+                  key={p.num}
+                  href={DRIVE_FOLDER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hs-card"
+                >
+                  <div className="hs-card-photo">
+                    <div className="hs-photo-placeholder">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="0.8">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                      </svg>
+                    </div>
+                    <div className="hs-card-overlay">
+                      <span className="hs-download-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                          <polyline points="7 10 12 15 17 10"/>
+                          <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        View &amp; Download
+                      </span>
+                    </div>
+                  </div>
+                  <div className="hs-card-info">
+                    <p className="hs-card-num">{p.num}</p>
+                    <p className="hs-card-name">
+                      {prefix}<strong>{base}</strong>{suffix}
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="hs-empty">
+              <p>No results for "{search}"</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* DRIVE EMBED */}
+      <div className="hs-embed-section">
+        <div className="hs-inner">
+          <div className="hs-embed-header">
+            <p className="section-label">Full Photo Folder — Google Drive</p>
+            <a href={DRIVE_FOLDER_URL} target="_blank" rel="noopener noreferrer" className="btn-view-all" style={{ marginTop: 0 }}>
+              View &amp; Download All
               <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.2">
                 <line x1="0" y1="5" x2="12" y2="5"/>
                 <polyline points="8 1 12 5 8 9"/>
               </svg>
             </a>
+          </div>
+          <div className="drive-embed-wrap">
+            <iframe
+              src={DRIVE_EMBED_URL}
+              title="CNHF Headshots — Google Drive"
+              className="drive-embed-frame"
+              allowFullScreen
+            />
           </div>
         </div>
       </div>
@@ -211,76 +186,6 @@ export default function Gallery() {
           ← Back to Portfolio
         </Link>
       </footer>
-
-      {/* LIGHTBOX */}
-      <div
-        className={`lightbox${lightboxIndex !== null ? " open" : ""}`}
-        onClick={(e) => { if (e.target === e.currentTarget) closeLightbox(); }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Photo lightbox"
-      >
-        <button className="lightbox-close" onClick={closeLightbox} aria-label="Close">
-          ×
-        </button>
-
-        {lightboxIndex !== null && (
-          <div className="lightbox-img-wrap">
-            {isRealUrl(PHOTOS[lightboxIndex].src) ? (
-              <img
-                src={PHOTOS[lightboxIndex].src}
-                alt={PHOTOS[lightboxIndex].alt}
-              />
-            ) : (
-              <div
-                className="lightbox-placeholder"
-                style={{ height: "min(70vh, 600px)" }}
-              >
-                <div style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: 16,
-                  opacity: 0.2,
-                }}>
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="0.8">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                    <circle cx="8.5" cy="8.5" r="1.5"/>
-                    <polyline points="21 15 16 10 5 21"/>
-                  </svg>
-                  <span style={{ fontSize: 12, letterSpacing: "0.15em", color: "white", textTransform: "uppercase" }}>
-                    Photo {lightboxIndex + 1}
-                  </span>
-                </div>
-              </div>
-            )}
-
-            <button
-              className="lightbox-arrow prev"
-              onClick={(e) => { e.stopPropagation(); prev(); }}
-              aria-label="Previous photo"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </button>
-
-            <button
-              className="lightbox-arrow next"
-              onClick={(e) => { e.stopPropagation(); next(); }}
-              aria-label="Next photo"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
-                <polyline points="9 18 15 12 9 6"/>
-              </svg>
-            </button>
-
-            <div className="lightbox-counter">
-              {lightboxIndex + 1} / {PHOTOS.length}
-            </div>
-          </div>
-        )}
-      </div>
     </>
   );
 }

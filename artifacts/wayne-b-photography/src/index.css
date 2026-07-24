@@ -773,6 +773,168 @@ section {
   transform: scale(1);
 }
 
+/* ── HEADSHOTS GALLERY ────────────────────────────────── */
+.hs-section {
+  background: var(--black);
+  padding: 80px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.hs-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hs-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hs-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 8px;
+  color: rgba(255,255,255,0.4);
+}
+
+.hs-search {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  width: 240px;
+}
+
+.hs-search::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+.hs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  margin-bottom: 80px;
+}
+
+.hs-card {
+  display: block;
+  text-decoration: none;
+  color: var(--white);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hs-card:hover {
+  transform: translateY(-4px);
+}
+
+.hs-card-photo {
+  aspect-ratio: 3/4;
+  background: linear-gradient(160deg, #1c1c1c 0%, #141414 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hs-photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.08;
+}
+
+.hs-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.hs-card:hover .hs-card-overlay {
+  opacity: 1;
+}
+
+.hs-download-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+
+.hs-card-info {
+  padding: 14px 0 0;
+}
+
+.hs-card-num {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 4px;
+}
+
+.hs-card-name {
+  font-size: 13px;
+  font-family: var(--font-sans);
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.hs-card-name strong {
+  font-weight: 500;
+}
+
+.hs-empty {
+  padding: 80px 0;
+  text-align: center;
+  color: rgba(255,255,255,0.3);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.hs-embed-section {
+  background: var(--black);
+  padding: 0 0 80px;
+}
+
+.hs-embed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+@media (max-width: 900px) {
+  .hs-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .hs-grid { grid-template-columns: repeat(2, 1fr); }
+  .hs-search-row { flex-direction: column; align-items: flex-start; }
+  .hs-search { width: 180px; }
+  .hs-inner { padding: 0 20px; }
+}
+
 /* ── DRIVE EMBED ──────────────────────────────────────── */
 .drive-embed-section {
   margin-top: 64px;
